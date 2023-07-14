@@ -7,7 +7,7 @@
                 <input type="text" v-model="configForm.champName">
             </div>
             <div class="form-group">
-                <label for="">Type</label>
+                <label for="">Label</label>
                 <input type="text" v-model="configForm.champType">
             </div>
             <div class="form-group">
@@ -41,16 +41,16 @@ export default {
     data() { 
         return {
              configForm: {
-                champName: this.existingValue?.champName,
-                champObligatoire: this.existingValue?.champObligatoire,
+                champName: this.existingValue?.name,
+                champObligatoire: this.existingValue?.required,
                 description: this.existingValue?.description,
             },
         }
     },
     watch: {
         existingValue(e) {
-            this.configForm.champName = e?.champName;
-            this.configForm.champObligatoire = e?.champObligatoire;
+            this.configForm.name = e?.name;
+            this.configForm.required = e?.required;
             this.configForm.description = e.description;
            console.log(e);
         }

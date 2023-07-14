@@ -8,11 +8,10 @@
                 <div class="col-8">
                     <div v-for="(item,i) in inputList">
                         <div class="form-group row mb-2"  >
-                            
-                            <div class="col-4"><label for="" class="form-label">{{ item.champName }}
-                                <span v-if="item.champObligatoire">*</span>
+                            <div class="col-4"><label for="" class="form-label">{{ item.name }}
+                                <span v-if="item.required">*</span>
                             </label></div>
-                            <div class="col-8 input-group">
+                            <div class="col-6 input-group">
                                 <div v-if="choosedIndex == i" class="text-white bg-success">
                                    Editing ...
                                 </div>
@@ -23,6 +22,10 @@
                                     </button>
                                 </div>
                             </div>
+                        </div>
+
+                        <div>
+                            <button @click="generateSaveForm">Generate A form</button>
                         </div>
                     </div>
                     <div class="col-2">
@@ -52,6 +55,9 @@
         },
         
         methods: {
+                generateSaveForm() { 
+                    console.log(this.inputList)
+                },
             createAsimpleText() {
                 this.inputList.push({
                     name : "Simple Text",
@@ -59,10 +65,13 @@
             }, 
             validerChamps(e) {
                 this.inputList[this.choosedIndex] = {
-                    champName: e.champName,
-                    champObligatoire: e.champObligatoire,
+                    name: e.champName,
+                    required: e.champObligatoire,
                     description: e.description,
+                    label: e.champName,
+                    type: 'text',
                 };
+                console.log(e)
             },
             chooseDetail(index, item) {
                 this.choosedIndex = index;
