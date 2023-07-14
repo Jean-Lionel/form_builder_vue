@@ -7,7 +7,9 @@
             </button>
         </div>
         <div class="col">
-          Column
+           <button @click="createSelectType">
+                    Select Type
+                </button>
         </div>
     </div>
     </div>
@@ -18,7 +20,10 @@
     methods: {
             createAsimpleText() {
             this.$emit('createAsimpleText');
-            }
+            },
+            createSelectType() {
+            this.$emit('createSelectType');
+            },
         }
     }
 </script>
