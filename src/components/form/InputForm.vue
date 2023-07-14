@@ -1,5 +1,6 @@
 <template>
-    <div> 
+    <div>
+       
         <div class="row">
             <div class="form-group">
                 <label for="">Name</label>
@@ -46,11 +47,19 @@ export default {
             },
         }
     },
+    watch: {
+        existingValue(e) {
+            this.configForm.champName = e?.champName;
+            this.configForm.champObligatoire = e?.champObligatoire;
+            this.configForm.description = e.description;
+           console.log(e);
+        }
+    },
     methods: {
         validerChamps() {
             this.$emit("validerChamps", this.configForm);
         }
-    }
+    },
 }
 </script>
 
