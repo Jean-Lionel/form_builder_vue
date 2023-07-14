@@ -2,7 +2,9 @@
     <div>
         <div class="row">
         <div class="col">
-          Column
+            <button @click="createAsimpleText">
+                Simple text
+            </button>
         </div>
         <div class="col">
           Column
@@ -13,7 +15,11 @@
 
 <script>
     export default {
-        
+    methods: {
+            createAsimpleText() {
+            this.$emit('createAsimpleText');
+            }
+        }
     }
 </script>
 

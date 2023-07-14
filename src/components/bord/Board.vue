@@ -1,10 +1,7 @@
 <template>
     <div 
-    :id="id"
-    @dragover.prevent
-    @drop.prevent="drop"
     >
-        <slot/>
+        
     </div>
 </template>
 

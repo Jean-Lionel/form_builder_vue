@@ -1,32 +1,29 @@
 <template>
     <div>
-       <div class="container-fluid">
-        <div class="row">
-            <div class="col-2">
-                <LeftSide/>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2">
+                    <LeftSide @createAsimpleText="createAsimpleText"/>
+                </div>
+                <div class="col-8">
+                    <div v-for="(item,i) in inputList">
+                        <div class="form-group row mb-2" @click="chooseDetail(i, item)">
+                            <div class="col-4"><label for="" class="form-label">{{ item.champName }}
+                                <span v-if="item.champObligatoire">*</span>
+                            </label></div>
+                            <div class="col-8">
+                                <input type="text" name="" id="" class="form-control form-control-sm" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted">Help text</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                 <input-form :existingValue="existingValue" @validerChamps="validerChamps"/>
+                </div>
             </div>
-            <div class="col-8">
-                <board id="bord-1">
-                    <card
-                    id="card-1"
-                    :draggable="true"
-                    >
-                    <h1>ello </h1>
-                    </card>
-                </board>
-                <board id="bord-2">
-                    <card
-                    id="card-2"
-                    :draggable="true"
-                    >
-                    <h1>Card 3 </h1>
-                    </card>
-                </board>
-            </div>
-            <div class="col-2"></div>
+            
         </div>
-        
-       </div>
     </div>
 </template>
 
@@ -34,10 +31,39 @@
 import LeftSide from '@/components/side/LeftSide.vue'
 import Board from '@/components/bord/Board.vue'
 import Card from '@/components/bord/Card.vue'
-    export default {
-  components: { LeftSide, Board, Card },
-        
+import InputForm from '@/components/form/InputForm.vue'
+export default {
+    components: { LeftSide, Board, Card, InputForm },
+    data() { 
+        return {
+            existingValue: {},
+            inputList: [
+            
+            ],
+            choosedIndex : -1,
+        }
+    },
+    
+    methods: {
+        createAsimpleText() {
+            this.inputList.push({
+                name : "Simple Text",
+            });
+        }, 
+        validerChamps(e) {
+             this.inputList[this.choosedIndex] = {
+                champName: e.champName,
+                champObligatoire: e.champObligatoire,
+                description: e.description,
+            };
+        },
+        chooseDetail(index, item) {
+            this.choosedIndex = index;
+            this.existingValue = item;
+        }
     }
+    
+}
 </script>
 
 <style lang="scss" scoped>
