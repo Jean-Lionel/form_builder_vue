@@ -32,11 +32,10 @@
                 </div>
                 <div class="col-2">
 
-                    <!-- v-if="displayForm == 'SELECT'" -->
-
                     <select-fome-detail 
+                     v-if="displayForm == 'SELECT'"
                     @addOption="addOption"
-                    
+                    :existingValue="existingValue"
                     />                    
                     <input-form v-if="displayForm == 'INPUT_TEXT'" :existingValue="existingValue" @validerChamps="validerChamps"/>
                     
@@ -77,6 +76,7 @@ export default {
              this.choosedIndex = item.index;
             this.existingValue = item.item;
             this.displayForm = "SELECT";
+            this.existingValue = item;
         },
         generateSaveForm() { 
             console.log(this.inputList)
@@ -91,7 +91,8 @@ export default {
                 items: [],
             }
             this.inputList.push(item);
-    
+            this.existingValue = item;
+
         },
         createAsimpleText() {
             

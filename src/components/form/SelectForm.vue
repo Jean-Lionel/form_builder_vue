@@ -2,7 +2,7 @@
     <div class="form-group">
            
         <label for="">{{ item.name }}</label>
-
+     
         <div class="input-group">
             <div v-if="isEditing" class="text-white bg-success">
                         Editing ...
@@ -21,7 +21,7 @@
 
 <script>
     export default {
-    props: ["item", "index","isEditing"],
+    props: ["item", "index","isEditing", "existingValue"],
 
     methods: {
         chooseDetail(index, item) {

@@ -1,6 +1,7 @@
 <template>
     <div>
         <div class="row">
+            
             <div class="col-12">
                 <ol>
                     <li v-for="(item, i ) in optiontionList" class="d-flex justify-content-between">
@@ -30,11 +31,20 @@
 
 <script>
 export default {
+    props:["existingValue"],
     data() {
         return {
             optionValue: "",
             optiontionList: [],
             required : false,
+        }
+    },
+    mounted() { 
+       this.optiontionList = [];
+    },
+    watch: {
+        existingValue(e) {  
+            this.optiontionList = this.existingValue?.item?.items?.items ?? [];
         }
     },
     methods: {
@@ -49,10 +59,9 @@ export default {
          },
         addOption() {
             if (this.optionValue.trim().length > 2) {
-                
-                this.optiontionList.push(this.optionValue);
+              
+               this.optiontionList.push(this.optionValue);
                 this.optionValue = "";
-               
             } else {
                 alert("Entre une nouvel valeur");
             }
