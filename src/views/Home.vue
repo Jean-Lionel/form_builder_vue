@@ -22,6 +22,8 @@
                        :item="item"
                        :index="i"
                        @chooseSelectDetail="chooseSelectDetail"
+
+                       @addOption="addOption"
                        /> 
                     </div>
                     <div>
@@ -29,7 +31,15 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <input-form :existingValue="existingValue" @validerChamps="validerChamps"/>
+
+                    <!-- v-if="displayForm == 'SELECT'" -->
+
+                    <select-fome-detail 
+                    @addOption="addOption"
+                    
+                    />                    
+                    <input-form v-if="displayForm == 'INPUT_TEXT'" :existingValue="existingValue" @validerChamps="validerChamps"/>
+                    
                 </div>
             </div>
             
@@ -44,22 +54,29 @@ import Card from '@/components/bord/Card.vue'
 import InputForm from '@/components/form/InputForm.vue'
 import InputItem from '@/components/form/InputItem.vue'
 import SelectForm from '@/components/form/SelectForm.vue'
+import SelectFomeDetail from '@/components/form/SelectFomeDetail.vue'
 export default {
-    components: { LeftSide, Board, Card, InputForm, InputItem, SelectForm },
+    components: { LeftSide, Board, Card, InputForm, InputItem, SelectForm, SelectFomeDetail },
     data() { 
         return {
             existingValue: {},
             inputList: [
             
             ],
-            choosedIndex : -1,
+            choosedIndex: -1,
+
+            displayForm : "",
         }
     },
     
     methods: {
+        addOption(item) {
+            this.inputList[this.choosedIndex].items = item;
+        },
         chooseSelectDetail(item) { 
              this.choosedIndex = item.index;
             this.existingValue = item.item;
+            this.displayForm = "SELECT";
         },
         generateSaveForm() { 
             console.log(this.inputList)
@@ -71,16 +88,13 @@ export default {
                 description: "",
                 label: "Select Item",
                 type: 'select',
-                items: [{
-                    value : "",
-                    option : "---Select---",
-                }],
+                items: [],
             }
-
             this.inputList.push(item);
-            console.log(item)
+    
         },
         createAsimpleText() {
+            
             this.inputList.push({
                 name : "Simple Text",
                 type : "text",
@@ -98,9 +112,9 @@ export default {
             console.log(e)
         },
         chooseDetail(item) {
-           
             this.choosedIndex = item.index;
             this.existingValue = item.item;
+             this.displayForm = "INPUT_TEXT";
         }
     }
     

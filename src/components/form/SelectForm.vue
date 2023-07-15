@@ -1,5 +1,6 @@
 <template>
     <div class="form-group">
+           
         <label for="">{{ item.name }}</label>
 
         <div class="input-group">
@@ -7,7 +8,7 @@
                         Editing ...
                 </div>
         <select class="form-control form-control-sm">
-                <option v-for="el in item.items" :value="el.value">{{ el.option }}</option>
+                <option v-for="el in item?.items?.items" :value="el">{{ el }}</option>
             </select>
             <button>
                         <small style="cursor:pointer;" id="helpId" class="text-muted" @click="chooseDetail(index, item)">
